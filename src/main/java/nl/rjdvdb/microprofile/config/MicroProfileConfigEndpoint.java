@@ -10,7 +10,6 @@ import javax.ws.rs.core.Response;
 import nl.rjdvdb.persistence.TodoDao;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
-
 @Path("/")
 public class MicroProfileConfigEndpoint {
 
@@ -22,9 +21,9 @@ public class MicroProfileConfigEndpoint {
     TodoDao dao;
 
     @GET
-    @Produces("text/plain")
+    @Produces("application/json")
     public Response config1() {
-        return Response.ok("config1 = " + config1 +
-                "\n"+dao.list()).build();
+        return Response.ok(new SillyResponse(config1,
+                dao.list())).build();
     }
 }

@@ -15,3 +15,9 @@ Goto: `http://localhost:8080`. It will return a value defined in the file `src/m
 
 Added a `persistence.xml` referencing a datasource defined in the `datasource.cli` jboss CLI script.
 In the `pom.xml` we configure the cli script to be run and we setup wildfly to be able to communicate with jpa.
+
+## Writing an integration test
+
+Start the database and run `mvn verify`. It will run the test `MicroProfileConfigEndpointIT.java`
+
+The tests cannot be started from the IDE. The test needs a running database.

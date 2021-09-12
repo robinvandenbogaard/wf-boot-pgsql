@@ -72,10 +72,31 @@
                 <artifactId>wildfly-jar-maven-plugin</artifactId>
                 <version>4.0.3.Final</version>
                 <configuration>
-                    <feature-pack-location>wildfly@maven(org.jboss.universe:community-universe)#${version.wildfly}</feature-pack-location>
+                    <cli-sessions>
+                        <cli-session>
+                            <script-files>
+                                <script>src/main/scripts/datasource.cli</script>
+                            </script-files>
+                            <resolve-expressions>true</resolve-expressions>
+                        </cli-session>
+                    </cli-sessions>
+                    <feature-packs>
+                        <feature-pack>
+                            <location>wildfly@maven(org.jboss.universe:community-universe)#${version.wildfly}</location>
+                        </feature-pack>
+                        <!-- provides jdbc drivers and datasource for various databases -->
+                        <feature-pack>
+                            <groupId>org.wildfly</groupId>
+                            <artifactId>wildfly-datasources-galleon-pack</artifactId>
+                            <version>2.0.3.Final</version>
+                        </feature-pack>
+                    </feature-packs>
                     <layers>
+                        <!-- Details: https://docs.wildfly.org/24/Bootable_Guide.html#wildfly_layers -->
                         <layer>jaxrs</layer>
                         <layer>observability</layer>
+                        <layer>jpa</layer>
+                        <layer>postgresql-driver</layer>
                     </layers>
                     <excluded-layers>
                         <layer>deployment-scanner</layer>
